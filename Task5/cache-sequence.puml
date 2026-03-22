@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+== Read ==
+autonumber
+
+App -> Cache: Request list of unclaimed orders
+alt Cache hit
+    App <-- Cache: Respond with list from cache
+else Cache miss (first request)
+    Cache <-- DB: Read list of unclaimed orders
+    App <-- Cache: Respond with newly acquired data
+end
+
+== Write new order ==
+autonumber
+
+App -> Cache: Write new order
+Cache -> DB: Write new order
+
+alt Write success
+    Cache <-- DB: Write success
+    Cache -> Cache: Add entry to the cached list of unclaimed orders
+    App <-- Cache: Respond with success
+else Write error
+    Cache <-- DB: Write error
+    App <-- Cache: Respond with error
+end
+
+== Write order update ==
+autonumber
+
+App -> Cache: Write order status change
+Cache -> DB: Write order status change
+
+alt Write success
+    Cache <-- DB: Write success
+    Cache -> Cache: Remove entry from  the cached list of unclaimed orders
+    App <-- Cache: Respond with success
+else Write error
+    Cache <-- DB: Write error
+    App <-- Cache: Respond with error
+end
+
+@enduml
