@@ -35,9 +35,9 @@
   - Number of dead-letter-exchange letters in RabbitMQ
 
 - Необходимо для контроля частоты запросов к интерфейсам (R)
-  - Number of requests (RPS) per user for internet shop API 
-  - Number of requests (RPS) per user for CRM API 
-  - Number of requests (RPS) per user for MES API
+  - Number of requests (RPS) for internet shop API 
+  - Number of requests (RPS) for CRM API 
+  - Number of requests (RPS) for MES API
 - Необходимо для контроля доли ошибок в запросах (E)
   - Number of HTTP 500 for CRM API 
   - Number of HTTP 500 for MES API 
